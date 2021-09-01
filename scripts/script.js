@@ -1,3 +1,4 @@
+//Randomizing the computer's pick
 function computerPlay() {
     let x
     x = Math.floor(Math.random() * 3) + 1;   
@@ -13,15 +14,7 @@ function computerPlay() {
     }
 }
 
-//Prompting the player to choose between rock, paper, or scissors then converting to lower case to make it case-insensitive
-let playerSelection = prompt("Rock, Paper or Scissors?");
-playerSelection = playerSelection.toLowerCase();
-let computerSelection = computerPlay();
-console.log("Player chooses " + playerSelection);
-console.log("Computer chooses " + computerSelection);
-console.log(playRound(playerSelection, computerSelection));
-
-// Converting the player selection to 1,2, or 3 corresponding to rock,paper, or scissors
+// Converting the player's/computer's selection to 1,2, or 3 corresponding to rock,paper, or scissors
 function convertSelection(x) {
     switch(x) {
         case "rock":
@@ -63,3 +56,18 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+//Prompting the player to choose between rock, paper, or scissors then converting to lower case to make it case-insensitive
+//Making it loop 5 times for 5 rounds
+for (let i=1; i<=5; i++) {
+    let playerSelection = prompt("Rock, Paper or Scissors?");
+    playerSelection = playerSelection.toLowerCase();
+    if(playerSelection != "rock" || playerSelection != "paper" || playerSelection != "scissors") {
+        console.log("Error input")
+        break;
+    }
+    let computerSelection = computerPlay();
+    console.log("ROUND " + i);
+    console.log("Player chooses " + playerSelection);
+    console.log("Computer chooses " + computerSelection);
+    console.log(playRound(playerSelection, computerSelection));
+}
