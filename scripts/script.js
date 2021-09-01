@@ -3,11 +3,11 @@ function computerPlay() {
     x = Math.floor(Math.random() * 3) + 1;   
     switch(x) {
         case 1:
-            return 1; //Rock
+            return "rock"; //Rock
         case 2:
-            return 2; //Paper   
+            return "paper"; //Paper   
         case 3:
-            return 3; //Scissors
+            return "scissors"; //Scissors
         default:
             console.log("Error");           
     }
@@ -16,11 +16,13 @@ function computerPlay() {
 //Prompting the player to choose between rock, paper, or scissors then converting to lower case to make it case-insensitive
 let playerSelection = prompt("Rock, Paper or Scissors?");
 playerSelection = playerSelection.toLowerCase();
-console.log(playerSelection);
 let computerSelection = computerPlay();
+console.log("Player chooses " + playerSelection);
+console.log("Computer chooses " + computerSelection);
+console.log(playRound(playerSelection, computerSelection));
 
 // Converting the player selection to 1,2, or 3 corresponding to rock,paper, or scissors
-function convertPlayerSelection(x) {
+function convertSelection(x) {
     switch(x) {
         case "rock":
             return 1;
@@ -32,17 +34,32 @@ function convertPlayerSelection(x) {
 }
 
 function playRound(playerSelection, computerSelection) {
-    //if (playerSelection == "rock" && computerSelection == "rock") {
-    //    return "Draw! Both chose Rock";
-    //} else if (playerSelection == "rock" && computerSelection == "paper") {
-    //    return "You Lose! Paper beats Rock.";
-    //} else if (playerSelection == "rock" && computerSelection == "scissors") {
-    //   return "You Won! Rock beats Scissors.";
-    //}
-
     //Setting the variables for player and computer
-    player = convertPlayerSelection(playerSelection);
-    computer = computerSelection;
+    player = convertSelection(playerSelection);
+    computer = convertSelection(computerSelection);   
 
-    
+    //Using Switch statement to determine the result of the round
+    switch(player * computer) {
+        case 2: //Rock and Paper
+            if(player == 1) {
+                return "You Lose! Paper beats Rock";
+            } else {
+                return "You Won! Paper beats Rock";
+            }
+        case 3: //player: Rock    computer: Scissors
+            if(player == 1) {
+                return "You Won! Rock beats Scissors";
+            } else {
+                return "You Lose! Rock beats Scissors";
+            }
+        case 6: //player: Paper   computer: Scissors
+            if(player == 2){
+                return "You Lose! Scissors beats Paper";
+            } else {
+                return "You Won! Scissors beats Paper";
+            }
+        default:
+            return "DRAW!";
+    }
 }
+
